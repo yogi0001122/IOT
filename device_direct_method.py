@@ -4,6 +4,7 @@
 import random
 import time
 import threading
+import webbrowser
 
 # Using the Python Device SDK for IoT Hub:
 #   https://github.com/Azure/azure-iot-sdk-python
@@ -45,6 +46,18 @@ def device_method_listener(device_client):
             else:
                 response_payload = {"Response": "Executed direct method {}".format(method_request.name)}
                 response_status = 200
+                
+        elif method_request.name == "IOT Play":
+            try:
+                print ("Playing Azure Video on Youtube.......")
+                webbrowser.open("https://www.youtube.com/watch?v=smuZaZZXKsU")
+            except:
+                response_payload = {"Response": "Invalid request"}
+                response_status = 400
+            else:
+                response_payload = {"Response": "Executed direct method {}".format(method_request.name)}
+                response_status = 200
+
         else:
             response_payload = {"Response": "Direct method {} not defined".format(method_request.name)}
             response_status = 404
