@@ -9,18 +9,19 @@ import wmi
 # Using the Python Device SDK for IoT Hub:
 #   https://github.com/Azure/azure-iot-sdk-python
 # The sample connects to a device-specific MQTT endpoint on your IoT Hub.
-import iothub_client
+#import iothub_client
+from azure.iot.device import IoTHubDeviceClient, Message
 # pylint: disable=E0611
-from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
-from iothub_client import IoTHubMessage, IoTHubMessageDispositionResult, IoTHubError, DeviceMethodReturnValue
+#from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
+#from iothub_client import IoTHubMessage, IoTHubMessageDispositionResult, IoTHubError, DeviceMethodReturnValue
 
 # The device connection string to authenticate the device with your IoT hub.
 # Using the Azure CLI:
 # az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
-CONNECTION_STRING = "HostName=NCR-Unconference-Demo.azure-devices.net;DeviceId=NCR-Unconference-Device-1;SharedAccessKey=Vn6UH2Vck1Gsx9JTX8iuoD69I5t1kplJ/Yc1T3jJjFc="
+CONNECTION_STRING = "HostName=iothub-poc-demo.azure-devices.net;DeviceId=iot-device1;SharedAccessKey=fL8W+ivYhA/tDfs7KLAFk92bvLNO87XvAWRNRIaDJro="
 
 # Using the MQTT protocol.
-PROTOCOL = IoTHubTransportProvider.MQTT
+#PROTOCOL = IoTHubTransportProvider.MQTT
 MESSAGE_TIMEOUT = 10000
 
 # Define the JSON message to send to IoT Hub.
@@ -35,7 +36,8 @@ def send_confirmation_callback(message, result, user_context):
 
 def iothub_client_init():
     # Create an IoT Hub client
-    client = IoTHubClient(CONNECTION_STRING, PROTOCOL)
+    #client = IoTHubClient(CONNECTION_STRING, PROTOCOL)
+    client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
     return client
 
 def iothub_client_telemetry_sample_run():
@@ -56,24 +58,21 @@ def iothub_client_telemetry_sample_run():
                   temperature = sensor.Value				  
                   msg_txt_formatted = MSG_TXT % (temperature, sensorname)
                   print (msg_txt_formatted)
-                  message = IoTHubMessage(msg_txt_formatted)
+                  message = Message(msg_txt_formatted)
 
             # Add a custom application property to the message.
             # An IoT hub can filter on these properties without access to the message body.
-                  prop_map = message.properties()
-                  if temperature > 10:
-                   prop_map.add("temperatureAlert", "true")
-                  else:
-                   prop_map.add("temperatureAlert", "false")
+            if temperature > 30:
+              message.custom_properties["temperatureAlert"] = "true"
+            else:
+              message.custom_properties["temperatureAlert"] = "false"
 
             # Send the message.
-                  print( "Sending message: %s" % message.get_string() )
-                  client.send_event_async(message, send_confirmation_callback, None)
+            print( "Sending message: {}".format(message) )
+            client.send_message(message)
+            print ( "Message successfully sent" )
             time.sleep(5)
 
-    except IoTHubError as iothub_error:
-        print ( "Unexpected error %s from IoTHub" % iothub_error )
-        return
     except KeyboardInterrupt:
         print ( "IoTHubClient sample stopped" )
 
