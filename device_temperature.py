@@ -11,10 +11,6 @@ import wmi
 # The sample connects to a device-specific MQTT endpoint on your IoT Hub.
 #import iothub_client
 from azure.iot.device import IoTHubDeviceClient, Message
-# pylint: disable=E0611
-#from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
-#from iothub_client import IoTHubMessage, IoTHubMessageDispositionResult, IoTHubError, DeviceMethodReturnValue
-
 # The device connection string to authenticate the device with your IoT hub.
 # Using the Azure CLI:
 # az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
