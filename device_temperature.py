@@ -11,6 +11,10 @@ import wmi
 # The sample connects to a device-specific MQTT endpoint on your IoT Hub.
 #import iothub_client
 from azure.iot.device import IoTHubDeviceClient, Message
+# pylint: disable=E0611
+#from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
+#from iothub_client import IoTHubMessage, IoTHubMessageDispositionResult, IoTHubError, DeviceMethodReturnValue
+
 # The device connection string to authenticate the device with your IoT hub.
 # Using the Azure CLI:
 # az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
@@ -55,18 +59,14 @@ def iothub_client_telemetry_sample_run():
                   msg_txt_formatted = MSG_TXT % (temperature, sensorname)
                   print (msg_txt_formatted)
                   message = Message(msg_txt_formatted)
-
-            # Add a custom application property to the message.
-            # An IoT hub can filter on these properties without access to the message body.
-            if temperature > 30:
-              message.custom_properties["temperatureAlert"] = "true"
-            else:
-              message.custom_properties["temperatureAlert"] = "false"
-
-            # Send the message.
-            print( "Sending message: {}".format(message) )
-            client.send_message(message)
-            print ( "Message successfully sent" )
+                  if temperature > 30:
+                      message.custom_properties["temperatureAlert"] = "true"
+                  else:
+                      message.custom_properties["temperatureAlert"] = "false"
+                  # Send the message.
+                  print( "Sending message: {}".format(message) )
+                  client.send_message(message)
+                  print ( "Message successfully sent" )
             time.sleep(5)
 
     except KeyboardInterrupt:
