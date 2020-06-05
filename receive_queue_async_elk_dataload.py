@@ -9,12 +9,12 @@ from elasticsearch import Elasticsearch,helpers
 import json
 
 
-CONNECTION_STR = "Endpoint=sb://iothubdata.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Nt6m0j15Mle+iWkbJB/TqN89MQfskrE8e7EMtsms0WE="
-QUEUE_NAME  = "iotdata-device1"
+CONNECTION_STR = "Connectionstring"
+QUEUE_NAME  = "queueName"
 now = datetime.now()
 dt_string = now.strftime("%Y%m")
 # Connect to hosts and http_auth using params
-es = Elasticsearch('http://149.25.76.42:9250', http_auth=('elastic', 'dcsinfopass'))
+es = Elasticsearch('http://localhost:9250', http_auth=('elastic', 'password'))
 MSG_TXT = "{\"temperature\": %.2f,\"sensorname\": \"%.15s\",\"EventProcessedUtcTime\": \"%.25s\",\"ConnectionDeviceId\": \"%.15s\"}"
 
 async def main():
