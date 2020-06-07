@@ -5,7 +5,7 @@ Products:
   - Azure IOT HUB
 ---
 
-# IOT Device python SDK Code Samples 
+# IOT Device Python SDK Code Samples 
 
 These are code samples that show common scenario operations using Python different-2 libraries/module. 
 
