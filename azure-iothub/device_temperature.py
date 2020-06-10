@@ -59,7 +59,15 @@ def device_method_listener(device_client):
             else:
                 response_payload = {"Response": "Executed direct method {}".format(method_request.name)}
                 response_status = 200
-
+		
+        elif method_request.name == "reboot":
+		print ( "Rebooting device..." )
+		time.sleep(50)
+		os.system("shutdown /r /t 1")
+		time.sleep(20)
+		
+		print ( "Device rebooted." )
+		
         elif method_request.name == "IOT Play":
             try:
                 print ("Playing Azure Video on Youtube.......")
