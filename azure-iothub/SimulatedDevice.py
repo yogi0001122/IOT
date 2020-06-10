@@ -20,7 +20,7 @@ from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 # The device connection string to authenticate the device with your IoT hub.
 # Using the Azure CLI:
 # az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
-CONNECTION_STRING = "HostName=iothub-poc-demo.azure-devices.net;DeviceId=iot-device1;SharedAccessKey=fL8W+ivYhA/tDfs7KLAFk92bvLNO87XvAWRNRIaDJro="
+CONNECTION_STRING = ""
 
 MESSAGE_TIMEOUT = 10000
 INTERVAL = 5
