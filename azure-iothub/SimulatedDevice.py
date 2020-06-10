@@ -61,12 +61,12 @@ def device_method_listener(device_client):
                 response_status = 200
 		
         elif method_request.name == "reboot":
-		print ( "Rebooting device..." )
-		time.sleep(50)
-		os.system("shutdown /r /t 1")
-		time.sleep(20)
+                print ( "Rebooting device..." )
+                time.sleep(50)
+                os.system("shutdown /r /t 1")
+                time.sleep(20)
 		
-		print ( "Device rebooted." )
+                print ( "Device rebooted." )
 		
         elif method_request.name == "IOT Play":
             try:
