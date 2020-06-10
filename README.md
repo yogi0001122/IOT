@@ -15,7 +15,7 @@ These are code samples that show common scenario operations with iot solutions u
     - Handling the method request sent from IoT Hub
     - This contains a direct method that reboots that device. Calls the reboot direct method in the simulated device app through your IoT hub
 
-- [receive_queue_async_elk_dataload.py](./azure-iothub/receive_queue_async_elk_dataload.py) - Receive device telemetry messages from Azure Service BUS queue and load to elk index for visual representation of sensors data in Kibana.
+- [receive_queue_async_elk_dataload.py](./azure-iothub/receive_queue_async_elk_dataload.py) - Receive device telemetry batch messages from Azure Service BUS queue and load to elk index for visual representation of sensors data in Kibana.
 
    - Receiving messages from a Service Bus Queue asynchronously
    - Create Index in elk and insert/update data to elk index
