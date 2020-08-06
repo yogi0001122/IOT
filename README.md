@@ -7,7 +7,7 @@ Products:
   
 ---
 
-# IOT Device Python SDK Code Samples 
+# IOT Python Device SDK Code Samples 
 
 These are code samples that show common scenario operations with iot solutions using Python. 
 
