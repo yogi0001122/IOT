@@ -3,6 +3,8 @@ Page_type: IOT Use Cases
 Languages: Python
 Products:
   - Azure IOT HUB
+  - Self Developed IoT platfrom using all open source tools
+  
 ---
 
 # IOT Device Python SDK Code Samples 
